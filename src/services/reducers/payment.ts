@@ -1,6 +1,7 @@
 import {    
     SET_CARD_NUMBER,
-    SET_EXPIRATION_DATE,
+    SET_EXPIRATION_DATE_MONTH,
+    SET_EXPIRATION_DATE_YEAR,
     SET_CVV,
     START_PAYMENT_REQUEST,
     START_PAYMENT_SUCCESS,
@@ -8,10 +9,11 @@ import {
 } from '../action-constants/payment';
 
 import { TPaymentAction } from '../actions/payment';
+import { TExpDate } from '../../utils/types';
 
-type TPaymentState = {
+export type TPaymentState = {
     cardNumber: string,
-    expirationDate: string,
+    expirationDate: TExpDate,
     cvv: string,
     startPaymentRequest: boolean,
     startPaymentFailed: boolean,
@@ -19,7 +21,10 @@ type TPaymentState = {
 
 export const initialPaymentState = {
     cardNumber: '',
-    expirationDate: '',
+    expirationDate: {
+        month: '',
+        year: ''
+    },
     cvv: '',
     startPaymentRequest: false,
     startPaymentFailed: false,
@@ -33,10 +38,22 @@ export default (state = initialPaymentState, action: TPaymentAction): TPaymentSt
                 cardNumber: action.payload
             }
         }
-        case SET_EXPIRATION_DATE: {
+        case SET_EXPIRATION_DATE_MONTH: {
             return {
                 ...state,
-                expirationDate: action.payload
+                expirationDate: {
+                    ...state.expirationDate,
+                    month: action.payload
+                }
+            }
+        }
+        case SET_EXPIRATION_DATE_YEAR: {
+            return {
+                ...state,
+                expirationDate: {
+                    ...state.expirationDate,
+                    year: action.payload
+                }
             }
         }
         case SET_CVV: {

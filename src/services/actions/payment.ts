@@ -1,6 +1,7 @@
 import {
     SET_CARD_NUMBER,
-    SET_EXPIRATION_DATE,
+    SET_EXPIRATION_DATE_MONTH,
+    SET_EXPIRATION_DATE_YEAR,
     SET_CVV,
     START_PAYMENT_REQUEST,
     START_PAYMENT_SUCCESS,
@@ -11,8 +12,12 @@ export interface ISetCardNumberAction {
     readonly type: typeof SET_CARD_NUMBER;
     readonly payload: string;
 }
-export interface ISetExpirationDateAction {
-    readonly type: typeof SET_EXPIRATION_DATE;
+export interface ISetExpirationDateMonthAction {
+    readonly type: typeof SET_EXPIRATION_DATE_MONTH;
+    readonly payload: string;
+}
+export interface ISetExpirationDateYearAction {
+    readonly type: typeof SET_EXPIRATION_DATE_YEAR;
     readonly payload: string;
 }
 export interface ISetCvvAction {
@@ -35,7 +40,8 @@ export interface IDefaultAction {
 
 export type TPaymentAction = 
     ISetCardNumberAction |
-    ISetExpirationDateAction |
+    ISetExpirationDateMonthAction |
+    ISetExpirationDateYearAction |
     ISetCvvAction |
     IStartPaymentRequestAction |
     IStartPaymentSuccessAction |
